@@ -36,7 +36,7 @@ x_ob = AR_2[1 : n_2]
 x_test = AR_2[(n_2 + 1) : n]
 ar_model = arima(x_ob, order = c(2, 0, 0), include.mean = FALSE)
 Teta_1 = c(ar_model$coef[1], ar_model$coef[2])
-h = array(n_2)
+h = array(dim = n_2)
 h[1] = x_ob[1]
 h[2] = x_ob[2] - Teta_1[1]*x_ob[1]
 for (i in 3 : n_2) {h[i] = x_ob[i] - Teta_1[1]*x_ob[i-1] - Teta_1[2]*x_ob[i-2]}
@@ -57,10 +57,10 @@ A_1;Teta_1;Teta_11
 #Построить последовательность прогнозов на один шаг на тестовой выборке. 
 #Наложить последовательность прогнозов на последовательность наблюдений процесса
 PR = function(x_test, Teta, a) 
-{ x1 = array(n_3)
-  s = array(n_3)
-  lim_1 = array(n_3) 
-  lim_2 = array(n_3)
+{ x1 = array(dim = n_3)
+  s = array(dim = n_3)
+  lim_1 = array(dim = n_3) 
+  lim_2 = array(dim = n_3)
   x1[1] = 0
   x1[2] = Teta[1]*x_test[1]
   x1[3] = Teta[1]*x_test[2] + Teta[2]*x_test[1]
